@@ -44,7 +44,7 @@ public class CameraManager : MonoBehaviour
         {
             _camera.transform.SetParent(_finishCam);
         }
-        CamLerp(1f);
+        CamLerp(2f);
     }
     private void CamLerp(float value)
     {
