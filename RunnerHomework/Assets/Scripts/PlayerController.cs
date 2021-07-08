@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int laneOffset;
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
+    private int _gold;
     private void Awake() 
     {
         _isRunning = false;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start() 
     {
+       _gold = PlayerPrefs.GetInt("gold", 0);
        playerRb = GetComponentInChildren<Rigidbody>();
        _collider = GetComponentInChildren<BoxCollider>();
        startCol = _collider.size;
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
             SwipeInput();
                 break;
             case GameManager.GameState.FinishGame:
+            CameraManager.manager.FinishCam();
                 break;
         }
     }
@@ -56,7 +59,8 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.touchCount > 0)
         {
-            GameManager.manager.ToMainGame();           
+            GameManager.manager.ToMainGame();
+            UIManager.manager.HideIntro();           
         }
         CameraManager.manager.IntroCam();
     }
@@ -65,6 +69,11 @@ public class PlayerController : MonoBehaviour
         playerRoot.Translate(Vector3.forward * Time.deltaTime * speed);
         _isRunning = true;
         playerAnim.SetBool("run", true);
+    }
+    public void FinishMove()
+    {
+        playerAnim.SetBool("run", false);
+        playerAnim.SetTrigger("dance");
     }
     private void SwipeInput()
     {
@@ -138,6 +147,12 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForEndOfFrame();
             _renderer.material.color = tempColor;
         }
-        
     }
+    public void GoldIncrease()
+    {
+        _gold += 10;
+        PlayerPrefs.SetInt("gold", _gold);
+        UIManager.manager.ScoreUpdate(_gold);
+    }
+    
 }

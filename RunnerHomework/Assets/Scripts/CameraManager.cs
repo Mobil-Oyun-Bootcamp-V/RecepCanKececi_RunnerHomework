@@ -21,42 +21,42 @@ public class CameraManager : MonoBehaviour
     }
     public void IntroCam()
     {
-        CamFollow();
+        CamFollow(2f);
         if(_camera.transform.parent != _introCam)
         {
             _camera.transform.SetParent(_introCam);
         }
-        CamLerp();
+        CamLerp(2f);
     }
     public void GameCam()
     {
-        CamFollow();
+        CamFollow(5f);
         if(_camera.transform.parent != _gameCam)
         {
             _camera.transform.SetParent(_gameCam);
         }
-        CamLerp();
+        CamLerp(2f);
     }
     public void FinishCam()
     {
-        CamFollow();
+        CamFollow(2f);
         if(_camera.transform.parent != _finishCam)
         {
             _camera.transform.SetParent(_finishCam);
         }
-        CamLerp();
+        CamLerp(1f);
     }
-    private void CamLerp()
+    private void CamLerp(float value)
     {
         _camera.transform.localPosition = Vector3.Lerp(_camera.transform.localPosition, Vector3.zero, 
-        Time.deltaTime *2);
+        Time.deltaTime *value);
 
         _camera.transform.localRotation = Quaternion.Lerp(_camera.transform.localRotation, Quaternion.identity,
-        Time.deltaTime*2);
+        Time.deltaTime*value);
     }
-    private void CamFollow()
+    private void CamFollow(float value)
     {
-        _camPos.position = Vector3.Lerp(_camPos.position, _player.position, Time.deltaTime*5);
+        _camPos.position = Vector3.Lerp(_camPos.position, _player.position, Time.deltaTime*value);
     }
     
 
