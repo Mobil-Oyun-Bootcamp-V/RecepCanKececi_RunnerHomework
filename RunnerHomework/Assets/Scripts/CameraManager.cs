@@ -17,7 +17,7 @@ public class CameraManager : MonoBehaviour
     }
     private void Start() 
     {
-        _camera = Camera.main;    
+        _camera = FindObjectOfType<Camera>();   
     }
     public void IntroCam()
     {

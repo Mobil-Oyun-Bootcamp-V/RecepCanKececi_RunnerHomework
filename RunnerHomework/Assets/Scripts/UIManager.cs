@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     {
         manager = this;    
     }
+    
 
     public void ScoreUpdate(int score)
     {
@@ -26,5 +27,9 @@ public class UIManager : MonoBehaviour
     public void ShowNextLevelPanel()
     {
         _nextLevelPanel.SetActive(true);
+    }
+    public void LoadNextLevel()
+    {
+        LevelManager.manager.LoadLevel();
     }
 }

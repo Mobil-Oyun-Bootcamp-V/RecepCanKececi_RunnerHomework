@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
        slideCol = new Vector3(_collider.size.x, _collider.size.y/2,
         _collider.size.z);
         _renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        UIManager.manager.ScoreUpdate(_gold);
     }
     
     private void Update() 
