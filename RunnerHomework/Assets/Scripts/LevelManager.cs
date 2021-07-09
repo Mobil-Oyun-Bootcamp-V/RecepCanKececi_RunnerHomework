@@ -19,13 +19,25 @@ public class LevelManager : MonoBehaviour
     private void Start() 
     {
         index = 0;
-        StartCoroutine(LevelLoader());
+        StartCoroutine(LevelLoader(index));
+    }
+    public int Index 
+    { 
+        get
+        {
+            return index;
+        } 
+        set
+        {
+
+        } 
     }
     public void LoadLevel()
     {
-        StartCoroutine(LevelLoader());
+        index++;
+        StartCoroutine(LevelLoader(index));
     }
-    IEnumerator LevelLoader()
+    IEnumerator LevelLoader(int index)
     {
         loadingPanel.SetActive(true);
         loadingAnim.SetTrigger("fadeIn");
@@ -35,9 +47,13 @@ public class LevelManager : MonoBehaviour
             Destroy(currentLevel);
         }
         currentLevel = Instantiate(levels[index], Vector3.zero, Quaternion.identity);
-        index++;
         loadingAnim.SetTrigger("fadeOut");
         yield return new WaitForSeconds(1f);
         loadingPanel.SetActive(false);
     }
+    public void RestartLevel()
+    {
+        StartCoroutine(LevelLoader(index));
+    }
+
 }

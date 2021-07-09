@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Finish : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other) 
     {
         PlayerController controller = other.GetComponentInParent<PlayerController>();
         if(controller)
         {
-            controller._isFinished = true;
-            controller.FinishMove();
-            UIManager.manager.ShowNextLevelPanel();
             GameManager.manager.ToFinishGame();
-        }    
+            UIManager.manager.RetryMethod();
+            controller.DefeatMove();
+        }
     }
 }

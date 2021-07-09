@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private SkinnedMeshRenderer _renderer;
     [SerializeField] Animator playerAnim;
     [SerializeField] Transform playerRoot;
+    [SerializeField] Transform _finish;
     [SerializeField] ParticleSystem shadowParticle;
     private bool _isSwiping;
     private bool _isRunning;
@@ -16,8 +17,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 _targetPosition = Vector3.zero;
     private Vector3 slideCol;
     private Vector3 startCol;
-    int _currentLane;
-    int _startingLane = 1;
+    private int _currentLane;
+    private int _startingLane = 1;
+    private float _progress;
+    [HideInInspector] public bool _isFinished;
+
     [SerializeField] int laneOffset;
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
@@ -25,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private void Awake() 
     {
         _isRunning = false;
+        _isFinished = false;
         _currentLane = _startingLane;
     }
     private void Start() 
@@ -52,7 +57,10 @@ public class PlayerController : MonoBehaviour
             SwipeInput();
                 break;
             case GameManager.GameState.FinishGame:
-            CameraManager.manager.FinishCam();
+            if(_isFinished)
+            {
+                CameraManager.manager.FinishCam();
+            }
                 break;
         }
     }
@@ -70,11 +78,18 @@ public class PlayerController : MonoBehaviour
         playerRoot.Translate(Vector3.forward * Time.deltaTime * speed);
         _isRunning = true;
         playerAnim.SetBool("run", true);
+        _progress = playerRoot.position.z / _finish.position.z;
+        UIManager.manager.ProgressBar(_progress);
     }
     public void FinishMove()
     {
         playerAnim.SetBool("run", false);
         playerAnim.SetTrigger("dance");
+    }
+    public void DefeatMove()
+    {
+        playerAnim.SetBool("run", false);
+        playerAnim.SetTrigger("fall");
     }
     private void SwipeInput()
     {
