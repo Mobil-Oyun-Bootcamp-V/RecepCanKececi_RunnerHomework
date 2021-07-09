@@ -19,6 +19,7 @@ public class CameraManager : MonoBehaviour
     {
         _camera = FindObjectOfType<Camera>();   
     }
+    // Camera switches controlled by PlayerController with this instance.
     public void IntroCam()
     {
         CamFollow(2f);
@@ -46,6 +47,7 @@ public class CameraManager : MonoBehaviour
         }
         CamLerp(2f);
     }
+    // Changing camera positions smoothly with lerping.
     private void CamLerp(float value)
     {
         _camera.transform.localPosition = Vector3.Lerp(_camera.transform.localPosition, Vector3.zero, 

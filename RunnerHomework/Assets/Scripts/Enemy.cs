@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
         PlayerController controller = other.GetComponentInParent<PlayerController>();
         if(controller)
         {
+            // If player hit enemy or obstacle we change state to finish and show retry UI panel.
             GameManager.manager.ToFinishGame();
             UIManager.manager.RetryMethod();
             controller.DefeatMove();

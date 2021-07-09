@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // PlayerController takes user input and controls the player.
     private Rigidbody playerRb;
     private BoxCollider _collider;
     private SkinnedMeshRenderer _renderer;
@@ -15,8 +16,6 @@ public class PlayerController : MonoBehaviour
     private bool _isRunning;
     private Vector2 _startingTouch;
     private Vector3 _targetPosition = Vector3.zero;
-    private Vector3 slideCol;
-    private Vector3 startCol;
     private int _currentLane;
     private int _startingLane = 1;
     private float _progress;
@@ -37,9 +36,6 @@ public class PlayerController : MonoBehaviour
        _gold = PlayerPrefs.GetInt("gold", 0);
        playerRb = GetComponentInChildren<Rigidbody>();
        _collider = GetComponentInChildren<BoxCollider>();
-       startCol = _collider.size;
-       slideCol = new Vector3(_collider.size.x, _collider.size.y/2,
-        _collider.size.z);
         _renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         UIManager.manager.ScoreUpdate(_gold);
     }

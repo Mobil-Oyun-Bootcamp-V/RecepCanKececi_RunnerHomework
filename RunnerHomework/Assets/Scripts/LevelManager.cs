@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    // Level Manager is only script that work outside the level prefabs. We control and manage levels with it.
     public static LevelManager manager;
     [SerializeField] List<GameObject> levels;
     [SerializeField] GameObject loadingPanel;
@@ -32,11 +33,13 @@ public class LevelManager : MonoBehaviour
 
         } 
     }
+    // Everytime we load a level, level index increase 1.
     public void LoadLevel()
     {
         index++;
         StartCoroutine(LevelLoader(index));
     }
+    // We control level transitions with this coroutine.
     IEnumerator LevelLoader(int index)
     {
         loadingPanel.SetActive(true);

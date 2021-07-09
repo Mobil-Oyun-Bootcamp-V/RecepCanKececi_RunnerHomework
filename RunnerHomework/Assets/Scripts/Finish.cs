@@ -9,7 +9,8 @@ public class Finish : MonoBehaviour
         PlayerController controller = other.GetComponentInParent<PlayerController>();
         if(controller)
         {
-            controller._isFinished = true;
+            // If player finishes level camera is changing to finish cam with this _isFinished bool variable.
+            controller._isFinished = true; 
             controller.FinishMove();
             UIManager.manager.ShowNextLevelPanel();
             GameManager.manager.ToFinishGame();

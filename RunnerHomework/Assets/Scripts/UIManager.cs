@@ -6,6 +6,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    // UI Manager controls all UI elements of the game.
     public static UIManager manager;
     [SerializeField] GameObject _introPanel;
     [SerializeField] GameObject _nextLevelPanel;
