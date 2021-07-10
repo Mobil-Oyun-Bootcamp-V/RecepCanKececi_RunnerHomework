@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
                 // axes (otherwise we would have to swipe more vertically...)
 				diff = new Vector2(diff.x/Screen.width, diff.y/Screen.width);
 
-				if(diff.magnitude > 0.01f) //we set the swip distance to trigger movement to 1% of the screen width
+				if(diff.magnitude > 0.05f) //we set the swip distance to trigger movement to 5% of the screen width
 				{
 					if(diff.x < 0)
 					{
